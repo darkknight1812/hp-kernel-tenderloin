@@ -144,7 +144,12 @@ config CPU_FREQ_DEFAULT_GOV_ABYSSPLUG
 	  the help section of the driver. Fallback governor will be the
 	  performance governor.
 
-
+config CPU_FREQ_DEFAULT_GOV_INTELLIDEMAND
+        bool "intellidemand"
+        select CPU_FREQ_GOV_INTELLIDEMAND
+        select CPU_FREQ_GOV_PERFORMANCE
+        help
+          Intelligent OnDemand Govneror based on Samsung PatchedOnDemand 
 
 config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
@@ -261,6 +266,13 @@ config CPU_FREQ_GOV_ABYSSPLUG
 	  If you don't have one of these architectures or devices, use
 	  'ondemand' instead.
 
+	  If in doubt, say N.
+
+config CPU_FREQ_GOV_INTELLIDEMAND
+	tristate "'intellidemand' cpufreq governor"
+	depends on CPU_FREQ
+	help
+	  'Intellidemand' - an intelligent-ondemand governor
 	  If in doubt, say N.
 
 config CPU_FREQ_GOV_CONSERVATIVE
