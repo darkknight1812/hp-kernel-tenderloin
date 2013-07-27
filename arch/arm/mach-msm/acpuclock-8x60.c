@@ -988,7 +988,7 @@ void __init msm_acpu_clock_init(struct msm_acpu_clock_platform_data *clkdata)
 
 	/* Improve boot time by ramping up CPUs immediately. */
 	for_each_online_cpu(cpu)
-		acpuclk_set_rate(cpu, 1188000, SETRATE_INIT);
+		acpuclk_set_rate(cpu, 1512000, SETRATE_INIT);
 
 	cpufreq_table_init();
 	register_hotcpu_notifier(&acpuclock_cpu_notifier);
