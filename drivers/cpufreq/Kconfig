@@ -157,6 +157,12 @@ config CPU_FREQ_DEFAULT_GOV_BADASS
 	help
 	  Use the CPUFreq governor 'badass' as default. 
 
+config CPU_FREQ_DEFAULT_GOV_SMARTMAX
+	bool "smartmax"
+	select CPU_FREQ_GOV_SMARTMAX
+	help
+	  Use the CPUFreq governor 'smartmax' as default
+
 config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
 	select CPU_FREQ_GOV_INTERACTIVE
@@ -290,6 +296,12 @@ config CPU_FREQ_GOV_BADASS
            system must run a bit @ that Mhz with high load, then the frequency is
            bumped to the next Mhz. If that is still not enough the governor gives you
            full throttle.
+
+config CPU_FREQ_GOV_SMARTMAX
+	tristate "'smartmax' cpufreq policy governor"
+	select CPU_FREQ_TABLE
+	help
+	  'smartmax' combined ondemand and smartass2
 
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
