@@ -1,5 +1,5 @@
 # Declare Variables
-now=$(date +"%m_%d_%Y")
+now=$(date +"%m_%d_%Y_%H_%M")
 
 #Copy output to moboot folder
 cp ~/android/kernel/tpkernel/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/uImage
@@ -21,5 +21,5 @@ cp -f uImage.CyanogenMod.new boot.img
 zip -f cm_kernel_tenderloin.zip boot.img
 
 #Create new build date
-cp cm_kernel_tenderloin.zip $1cm_kernel_tenderloin_$now.zip
+cp cm_kernel_tenderloin.zip ~/Dropbox/cm_kernel_tenderloin_$now.zip
 echo "Finished"
