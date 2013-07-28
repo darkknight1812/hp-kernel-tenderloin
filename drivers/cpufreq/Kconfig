@@ -132,6 +132,7 @@ config CPU_FREQ_DEFAULT_GOV_SAVAGEDZEN
 config CPU_FREQ_DEFAULT_GOV_ABYSSPLUG
 	bool "abyssplug"
 	select CPU_FREQ_GOV_ABYSSPLUG
+	select CPU_FREQ_GOV_COVSERVATIVE
 	help
 	  Use the CPUFreq governor 'abyssplug' as default. This allows you
 	  to get a full dynamic frequency capable system with CPU
@@ -158,6 +159,12 @@ config CPU_FREQ_DEFAULT_GOV_SMARTMAX
 	select CPU_FREQ_GOV_SMARTMAX
 	help
 	  Use the CPUFreq governor 'smartmax' as default
+
+config CPU_FREQ_DEFAULT_GOV_LAGFREE
+	bool "lagfree"
+	select CPU_FREQ_GOV_LAGFREE
+	help
+	  Use the CPUFreq governor 'lagfree' as default.
 
 config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
@@ -298,6 +305,69 @@ config CPU_FREQ_GOV_SMARTMAX
 	select CPU_FREQ_TABLE
 	help
 	  'smartmax' combined ondemand and smartass2
+
+config CPU_FREQ_GOV_LAGFREE
+	tristate "'lagfree' cpufreq policy governor"
+	help
+	  'lagfree' - Lagfree is similar to ondemand. Main difference is its
+           optimization to become more battery friendly. Frequency is gracefully
+           decreased and increased, unlike ondemand which jumps to 100% too often.
+           Lagfree does not skip any frequency step while scaling up or down.
+
+config LAGFREE_MAX_LOAD
+	int "Max CPU Load"
+	default 50
+	depends on CPU_FREQ_GOV_LAGFREE
+	help
+	  CPU freq will be increased if measured load > max_cpu_load;
+
+config LAGFREE_MIN_LOAD
+	int "Min CPU Load"
+	default 15
+	depends on CPU_FREQ_GOV_LAGFREE
+	help
+	  CPU freq will be decreased if measured load < min_cpu_load;
+
+config LAGFREE_FREQ_STEP_DOWN
+	int "Frequency Step Down"
+	default 108000
+	depends on CPU_FREQ_GOV_LAGFREE
+	help
+	  Max freqeuncy delta when ramping down.
+
+config LAGFREE_FREQ_SLEEP_MAX
+	int "Max Sleep frequency"
+	default 192000
+	depends on CPU_FREQ_GOV_LAGFREE
+	help
+	  Max freqeuncy for screen off.
+
+config LAGFREE_FREQ_AWAKE_MIN
+	int "Min Awake frequency"
+	default 192000
+	depends on CPU_FREQ_GOV_LAGFREE
+	help
+	  Min freqeuncy for screen on.
+
+config LAGFREE_FREQ_STEP_UP_SLEEP_PERCENT
+	int "Freq step up percent sleep"
+	default 20
+	depends on CPU_FREQ_GOV_LAGFREE
+	help
+	  Frequency percent to step up while screen off.
+
+config CPU_FREQ_MIN_TICKS
+	int "Ticks between governor polling interval."
+	default 10
+	help
+	  Minimum number of ticks between polling interval for governors.
+
+config CPU_FREQ_SAMPLING_LATENCY_MULTIPLIER
+	int "Sampling rate multiplier for governors."
+	default 500
+	help
+	  Sampling latency rate multiplied by the cpu switch latency.
+	  Affects governor polling.
 
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
