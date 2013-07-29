@@ -196,6 +196,14 @@ config CPU_FREQ_DEFAULT_GOV_LULZACTIVEW
 	help
 	  Use the CPUFreq governor 'lulzactivew' as default.
 
+config CPU_FREQ_DEFAULT_GOV_ONDEMANDX
+	bool "ondemandx"
+	select CPU_FREQ_GOV_ONDEMANDX
+	help
+	  Use the CPUFreq governor 'ondemandx' as default.
+	  OndemandX has built in sleep profile, but not working Sysfs
+	  interface
+
 config CPU_FREQ_DEFAULT_GOV_INTERACTIVE
 	bool "interactive"
 	select CPU_FREQ_GOV_INTERACTIVE
@@ -436,6 +444,32 @@ config CPU_FREQ_GOV_LULZACTIVEW
        depends on CPU_FREQ
        help
         'lulzactivew' - A combination of lulzactive and performance by erik96
+
+config CPU_FREQ_GOV_ONDEMANDX
+	tristate "'ondemandx' cpufreq policy governor"
+	select CPU_FREQ_TABLE
+	help
+	  'ondemand' - This driver adds a dynamic cpufreq policy governor.
+	  The governor does a periodic polling and
+   	  changes frequency based on the CPU utilization.
+   	  The support for this governor depends on CPU capability to
+   	  do fast frequency switching (i.e, very low latency frequency
+   	  transitions).
+
+   	  To compile this driver as a module, choose M here: the
+   	  module will be called cpufreq_ondemand.
+
+   	  For details, take a look at linux/Documentation/cpu-freq.
+
+   	  If in doubt, say N.
+
+config CPU_FREQ_GOV_ONDEMANDX_INPUT
+   bool "Ramp up CPU frequency on input events"
+   default y
+   depends on CPU_FREQ_GOV_ONDEMANDX
+   help
+   Enable installation of an input event handler which will ramp up the
+   CPU to max frequency when an input event is received.
 
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
