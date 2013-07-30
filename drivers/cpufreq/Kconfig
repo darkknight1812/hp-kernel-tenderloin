@@ -464,12 +464,20 @@ config CPU_FREQ_GOV_ONDEMANDX
    	  If in doubt, say N.
 
 config CPU_FREQ_GOV_ONDEMANDX_INPUT
-   bool "Ramp up CPU frequency on input events"
-   default y
-   depends on CPU_FREQ_GOV_ONDEMANDX
-   help
-   Enable installation of an input event handler which will ramp up the
-   CPU to max frequency when an input event is received.
+	bool "Ramp up CPU frequency on input events"
+	default y
+	depends on CPU_FREQ_GOV_ONDEMANDX
+	help
+	  Enable installation of an input event handler which will ramp up the
+	  CPU to max frequency when an input event is received.
+
+config VDD_USERSPACE
+	bool "VDD sysfs interface"
+ 	default n
+	depends on CPU_FREQ_STAT
+	help
+ 	  exposes the VDD table to userspace
+	  allows users to adjust voltages on the fly
 
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
