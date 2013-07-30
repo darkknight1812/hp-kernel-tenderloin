@@ -2,21 +2,21 @@
 now=$(date +"%m_%d_%Y")
 
 #Change directory to working directory
-#cd ~/android/kernel/tpkernel/hp-kernel-tenderloin
+#cd ~/android/kernel/hp-kernel-tenderloin
 
 #Create defconfig
 #make ARCH=arm tenderloin_android_defconfig
 #echo "defconfig complete"
 
 #Build kernel using arm-eabi-4.4.3 toolchain
-#sudo make ARCH=arm -j16 CROSS_COMPILE=~/android/system/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi- uImage
+#make ARCH=arm -j16 CROSS_COMPILE=~/android/system/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi- uImage
 
 #Build kernel using Linaro toolchain
-make ARCH=arm -j10 CROSS_COMPILE=arm-linux-gnueabi- uImage
+make ARCH=arm -j16 CROSS_COMPILE=arm-linux-gnueabi- uImage
 #echo "build complete"
 
 #Copy output to moboot folder
-cp ~/android/kernel/tpkernel/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/uImage
+cp ~/android/kernel/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/uImage
 echo "Coppied"
 
 #Change directory to working directory
@@ -35,5 +35,5 @@ cp -f uImage.CyanogenMod.new boot.img
 zip -f cm_kernel_tenderloin.zip boot.img
 
 #Create new build date
-cp cm_kernel_tenderloin.zip $1cm_kernel_tenderloin_$now.zip
+cp cm_kernel_tenderloin.zip ~/Dropbox/cm_kernel_tenderloin_$now.zip
 echo "Finished"

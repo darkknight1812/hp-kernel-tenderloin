@@ -2,7 +2,7 @@
 now=$(date +"%m_%d_%Y_%H_%M")
 
 #Copy output to moboot folder
-cp ~/android/kernel/tpkernel/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/uImage
+cp ~/android/kernel/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/uImage
 echo "Coppied"
 
 #Change directory to working directory
