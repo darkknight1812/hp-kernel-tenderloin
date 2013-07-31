@@ -1,5 +1,5 @@
 # Declare Variables
-now=$(date +"%m_%d_%Y")
+now=$(date +"%m_%d_%Y_%H_%M")
 
 #Change directory to working directory
 #cd ~/android/kernel/hp-kernel-tenderloin
