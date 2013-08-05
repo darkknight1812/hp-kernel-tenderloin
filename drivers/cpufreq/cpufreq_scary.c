@@ -27,9 +27,9 @@ For devs - If you're going to port this driver to other devices, make sure to ed
 
 #define DEF_FREQUENCY_UP_THRESHOLD (80)
 #define DEF_FREQUENCY_DOWN_THRESHOLD (25)
-#define DEFAULT_SLEEP_MAX_FREQ 200000
-#define DEFAULT_SLEEP_MIN_FREQ 122000
-#define DEFAULT_SLEEP_PREV_FREQ 122000 //This is so that if there are any issues resulting in sleep_prev_freq getting set, there will be a backup freq
+#define DEFAULT_SLEEP_MAX_FREQ 192000
+#define DEFAULT_SLEEP_MIN_FREQ 192000
+#define DEFAULT_SLEEP_PREV_FREQ 192000 //This is so that if there are any issues resulting in sleep_prev_freq getting set, there will be a backup freq
 #define DEFAULT_PREV_MAX 230400
 static unsigned int suspended;
 static unsigned int sleep_max_freq=DEFAULT_SLEEP_MAX_FREQ;

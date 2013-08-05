@@ -52,7 +52,7 @@
  * lowering the frequency towards the ideal frequency is faster than below it.
  */
 
-#define DEFAULT_SUSPEND_IDEAL_FREQ 368000
+#define DEFAULT_SUSPEND_IDEAL_FREQ 192000
 static unsigned int suspend_ideal_freq;
 
 #define DEFAULT_AWAKE_IDEAL_FREQ 768000
