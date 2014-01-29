@@ -5,8 +5,8 @@ now=$(date +"%m_%d_%Y_%H_%M")
 #cd ~/android/kernel/hp-kernel-tenderloin
 
 #Create defconfig
-#make ARCH=arm tenderloin_android_defconfig
-#echo "defconfig complete"
+make ARCH=arm cyanogenmod_tenderloin_defconfig
+echo "defconfig complete"
 
 #Build kernel using arm-eabi-4.4.3 toolchain
 #make ARCH=arm -j16 CROSS_COMPILE=~/android/system/prebuilt/linux-x86/toolchain/arm-eabi-4.4.3/bin/arm-eabi- uImage
@@ -16,7 +16,7 @@ make ARCH=arm -j16 CROSS_COMPILE=arm-linux-gnueabi- uImage
 #echo "build complete"
 
 #Copy output to moboot folder
-cp ~/android/kernel/cm10/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/uImage/cm10
+cp ~/android/kernel/cm10/hp-kernel-tenderloin/arch/arm/boot/uImage ~/android/kernel/moboot/tools/cm10/uImage
 echo "Coppied"
 
 #Change directory to working directory
