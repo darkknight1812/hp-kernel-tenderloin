@@ -30,11 +30,25 @@ enum cpu_usage_stat {
 	NR_STATS,
 };
 
+struct cpu_usage_stats {
+	cputime64_t user;
+	cputime64_t nice;
+	cputime64_t system;
+	cputime64_t softirq;
+	cputime64_t irq;
+	cputime64_t idle;
+	cputime64_t iowait;
+	cputime64_t steal;
+	cputime64_t guest;
+	cputime64_t guest_nice;
+};
+
 struct kernel_cpustat {
 	u64 cpustat[NR_STATS];
 };
 
 struct kernel_stat {
+	struct cpu_usage_stats	cpustat;
 #ifndef CONFIG_GENERIC_HARDIRQS
        unsigned int irqs[NR_IRQS];
 #endif
