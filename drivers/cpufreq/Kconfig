@@ -251,6 +251,14 @@ config CPU_FREQ_GOV_LULZACTIVEW
        help
         'lulzactivew' - A combination of lulzactive and performance by erik96
 
+config VDD_USERSPACE
+	bool "VDD sysfs interface"
+ 	default n
+	depends on CPU_FREQ_STAT
+	help
+ 	  exposes the VDD table to userspace
+	  allows users to adjust voltages on the fly
+
 config CPU_FREQ_GOV_CONSERVATIVE
 	tristate "'conservative' cpufreq governor"
 	depends on CPU_FREQ
