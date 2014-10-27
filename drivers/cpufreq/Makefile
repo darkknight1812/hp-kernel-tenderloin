@@ -6,6 +6,9 @@ obj-$(CONFIG_CPU_FREQ_STAT)             += cpufreq_stats.o
 # CPU-boost framework
 obj-$(CONFIG_CPU_BOOST_FRAMEWORK)	+= cpu_boost.o
 
+# Retain CPU Freqs after hotplug
+obj-$(CONFIG_CPU_FREQ_RETAIN_MIN_MAX)	+= retain_cpu_freq.o
+
 # CPUfreq governors 
 obj-$(CONFIG_CPU_FREQ_GOV_PERFORMANCE)	+= cpufreq_performance.o
 obj-$(CONFIG_CPU_FREQ_GOV_POWERSAVE)	+= cpufreq_powersave.o

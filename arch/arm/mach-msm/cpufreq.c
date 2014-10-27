@@ -26,6 +26,9 @@
 #include <linux/cpumask.h>
 #include <linux/sched.h>
 #include <linux/suspend.h>
+#include <mach/socinfo.h>
+#include <mach/cpufreq.h>
+#include <linux/retain_cpu_freq.h>
 
 #include "acpuclock.h"
 
@@ -178,6 +181,11 @@ static int __cpuinit msm_cpufreq_init(struct cpufreq_policy *policy)
 	policy->min = CONFIG_MSM_CPU_FREQ_MIN;
 	policy->max = CONFIG_MSM_CPU_FREQ_MAX;
 #endif
+
+	if(retained_cpu_freq_policy(policy->cpu)) {
+		policy->min = get_retained_min_cpu_freq(policy->cpu);
+		policy->max = get_retained_max_cpu_freq(policy->cpu);
+	}
 
 	cur_freq = acpuclk_get_rate(policy->cpu);
 	if (cpufreq_frequency_table_target(policy, table, cur_freq,
