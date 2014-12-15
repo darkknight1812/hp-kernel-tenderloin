@@ -10807,7 +10807,7 @@ static int tenderloin_wifi_power(int on)
 	BUG_ON(!wifi_L19A_1V8);
 	BUG_ON(!wifi_S3A_1V8);
 
-	if (on) {
+	if (on && !wifi_is_on) {
 		//
 		// B. enable power
 		// 3.3V -> 1.8V -> wait (Tb 5) -> CHIP_PWD
@@ -10863,7 +10863,7 @@ static int tenderloin_wifi_power(int on)
 		// gpio_direction_output(pin_table[TENDERLOIN_GPIO_WLAN_RST_N_PIN], 1);
 		gpio_set_value(pin_table[TENDERLOIN_GPIO_WLAN_RST_N_PIN], 1);
 	}
-	else
+	else if (!on && wifi_is_on)
 	{
 		//CHIP_PWD -> wait (Tc 5)
 		printk(KERN_ERR "%s: MARK 3\n", __func__);
@@ -10873,6 +10873,10 @@ static int tenderloin_wifi_power(int on)
 
 		if (wifi_is_on) {
 			rc = configure_gpiomux_gpios(on, gpios, ARRAY_SIZE(gpios));
+
+			if (rc)
+				pr_err("%s: failed to configure gpios on=%d rc=%d\n",
+						__func__, on, rc);
 		}
 
 		rc = regulator_disable(wifi_L3B_3V3);
