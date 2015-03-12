@@ -997,8 +997,9 @@ phy_resumed:
 	/* release wake_lock if no work pending */
 	if (!work_pending(&dev->sm_work) && !hrtimer_active(&dev->timer) &&
 			!work_pending(&dev->otg_resume_work)) {
-		wake_unlock(&dev->wlock);
+		wake_lock_timeout(&dev->wlock, msecs_to_jiffies(2000));
 	}
+
 	/* Enable irq which was disabled before scheduling this work.
 	 */
 	enable_irq(dev->irq);
