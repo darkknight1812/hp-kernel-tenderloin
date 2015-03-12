@@ -59,6 +59,19 @@ config LINK_CPU_POLICIES
 	help
 	  "This will force both governors & min/max freq to stay synced"
 
+config CPU_BOOST_FRAMEWORK
+	bool "CPU-boost framework"
+	help
+	  This allows you to place hooks in various drivers to
+	  boost the CPU for either a specified duration or
+	  indefinitely (until it is manually unboosted).
+
+config CPU_FREQ_RETAIN_MIN_MAX
+	bool "Retain Min/Max CPU frequencies."
+	default n
+	help
+	  Retain individual CPU Min/Max policies after hotplug.
+
 choice
 	prompt "Default CPUFreq governor"
 	default CPU_FREQ_DEFAULT_GOV_USERSPACE if CPU_FREQ_SA1100 || CPU_FREQ_SA1110
@@ -454,23 +467,4 @@ config CPU_FREQ_GOV_BADASS_ALLOW_BYPASS
 	help
 	  'allow_bypass' - This driver adds a bypass to the phases
 
-menu "x86 CPU frequency scaling drivers"
-depends on X86
-source "drivers/cpufreq/Kconfig.x86"
-endmenu
-
-config CPU_BOOST_FRAMEWORK
-	bool "CPU-boost framework"
-	help
-	  This allows you to place hooks in various drivers to
-	  boost the CPU for either a specified duration or
-	  indefinitely (until it is manually unboosted).
-
-config CPU_FREQ_RETAIN_MIN_MAX
-	bool "Retain Min/Max CPU frequencies."
-	default n
-	help
-	  Retain individual CPU Min/Max policies after hotplug.
-
-endif
-endmenu
+endif # CPU_FREQ
