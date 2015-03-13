@@ -49,8 +49,6 @@ extern void error(char *);
 #endif
 
 void do_decompress(u8 *input, int len, u8 *output, void (*error)(char *x))
-
-int do_decompress(u8 *input, int len, u8 *output, void (*error)(char *x))
 {
 	decompress(input, len, NULL, NULL, output, NULL, error);
 }
